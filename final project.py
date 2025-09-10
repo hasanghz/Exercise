@@ -18,4 +18,3 @@ with open('D:/python/exercise/hash.csv') as f:
         for read in password.values():
                 if hashed in read:
                      print(i)
-    
