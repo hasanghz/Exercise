@@ -25,7 +25,7 @@ while 1:
          list2=[]
          y=input('Please enter the location and the value : ')
          list2=y.split()
-         list1.insert(int(list2[0]),(int(list1[1])))
+         list1.insert(int(list2[0]),(int(list2[1])))
          print('New list is : ', list1)
     elif x==3 :
         y=input('Please enter the value : ')
@@ -39,6 +39,7 @@ while 1:
         print(list1)
     elif x==5 :
         list1.sort(reverse=True)
+        print(list1)
     elif x==6:
         y=input('Please enter the value that you want to be chacked : ')
         print(list1.count(y))
