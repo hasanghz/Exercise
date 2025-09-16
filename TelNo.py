@@ -3,7 +3,7 @@ from collections import OrderedDict
     
 def add(telbook):          
     name=input('Please Enter the name of the contact that you want to add : ')
-    number=int('Please enter the number of the contact : ')
+    number=int(input('Please enter the number of the contact : '))
     telbook[name]=number
     print(telbook)
 
@@ -29,9 +29,13 @@ def change_name(telbook):
     new_name=input('Please enter the new name : ')
     telbook[new_name]=number
     print(telbook)
-
-    if number in telbook.values():
-        del telbook[telbook.keys(number)]
+    
+    list1=telbook.items()
+    for t in list1:
+        if number in t:
+            del telbook[t[0]]
+    
+    
 
 def show_all_contacts(telbook):
     for i in telbook:
