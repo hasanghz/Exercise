@@ -25,21 +25,26 @@ def change_number(telbook):
     print(telbook)
 
 def change_name(telbook):
-    number=int(input('Please enter the number that you want to change its name : '))
+    number=(input('Please enter the number that you want to change its name : '))
     new_name=input('Please enter the new name : ')
     telbook[new_name]=number
-    print(telbook)
     
-    list1=telbook.items()
-    for t in list1:
-        if number in t:
-            del telbook[t[0]]
+    for t in telbook:
+        
+        
+        if number == telbook[t]:
+            del telbook[t]
+            break
+    print(telbook)
+
+
+
     
     
 
 def show_all_contacts(telbook):
     for i in telbook:
-        print(i)
+        print(i,' :' ,telbook[i])
 
 
 
