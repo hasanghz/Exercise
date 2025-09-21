@@ -18,10 +18,15 @@ class employee:
     
     def pay(self):
         return (self.salary-self.salary.calinsurance-self.salary.caltax)
-    
+        
+
+    def __str__(self):
+        return f'The salary is : {self.salary.pay()}'
+
 
 p1=employee(1,'Hasan','Ghaznavi',2000)
-
-
 p2=employee(2,'Shiva','Alipour',1000)
 print(p1.calinsurance())
+print(p2.calinsurance())
+
+print(p1)
