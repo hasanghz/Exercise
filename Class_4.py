@@ -1,11 +1,10 @@
 class square:
-    def __init__(self,y):
-        __x=0
+    __x=0
     def __str__(self):
-        s=(str(self.__x))
+        s=f'{self.__x}'
         return s
 
-p=square(8)
+p=square()
 
 p.x=11
 print(p)
