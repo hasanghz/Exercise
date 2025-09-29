@@ -38,5 +38,31 @@ class employee(person):
         self.Lname=Lname
         self.salary=salary
     
+    def __del__(self):
+        print('The object is deleted')
+
+    def tax(self):
+        if self.salary>1500:
+            t=self.salary/10
+        else:
+            t=0
+        return t
+
+    def insurance(self):
+        i=self.salary/20
+        return i
+
+    def pay(self):
+        p=(self.salary-self.tax-self.isinstance)
+        return p
+    
+    def __str__(self):
+        s=f'Employee {self.Fname,self.Lname} code {self.code} pay is {self.pay()} \n The tax is {self.tax} \n The insurance is {self.insurance}'
+    
+    
+           
+
+
+
         
 
