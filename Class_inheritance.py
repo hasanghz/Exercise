@@ -56,6 +56,34 @@ class employee(person):
     def __str__(self):
         s=f'Employee {self.Fname,self.Lname} code {self.code} pay is {self.pay()} \n The tax is {self.tax} \n The insurance is {self.insurance}'
     
+count=0
+kount=0
+while 1:
+    
+    print('Please enter the functions number : ')
+    print('1 : Adding an employee.')
+    print('2 : Adding a student. ')
+    print('0 : Exit the program')
+    func=int(input())
+    if func==0:
+        break
+
+    if func == 1:
+        
+        E=[]
+        emp=input('Please enter the code, first name, last name and salary . ')
+        att=emp.split()
+        E[count]=employee(att[0],att[1],att[2],att[3])
+        print(str(E[count]))
+        count+=1
+
+    elif func ==2:
+        S=[]
+        std=input('Please enter the code, first name, last name and sum. ')
+        ls=std.split()
+        S[kount]=student(ls[0],ls[1],ls[2],ls[3])
+        print(str(S[count]))
+        kount+=1
 
            
 
