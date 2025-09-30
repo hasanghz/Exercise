@@ -11,10 +11,9 @@ class person:
 
 class student(person):
     def __init__(self,code,Fname,Lname,sum):
-        self.code=code
-        self.Fname=Fname
-        self.Lname=Lname
+        super().__init__(code,Fname,Lname)
         self.sum=sum
+        
 
     def __del__(self):
         print('Object is deleted')
@@ -33,9 +32,7 @@ class student(person):
 
 class employee(person):
     def __init__(self,code,Fname,Lname,salary):
-        self.code=code
-        self.Fname=Fname
-        self.Lname=Lname
+        super().__init__(code,Fname,Lname)
         self.salary=salary
     
     def __del__(self):
@@ -59,7 +56,7 @@ class employee(person):
     def __str__(self):
         s=f'Employee {self.Fname,self.Lname} code {self.code} pay is {self.pay()} \n The tax is {self.tax} \n The insurance is {self.insurance}'
     
-    
+
            
 
 
