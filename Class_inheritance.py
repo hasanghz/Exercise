@@ -29,6 +29,8 @@ class student(person):
     def __str__(self):
         t=f'The student {self.Fname} {self.Lname} code {self.code} , sum is {self.sum} and he or she is {self.ispass()}'
         return t
+    def __repr__(self):
+        return self.__str__()
 
 class employee(person):
     def __init__(self,code,Fname,Lname,salary):
@@ -94,7 +96,7 @@ while 1:
         print(f'Employees list is : {E}')
     
     elif func==4:
-        print(f'Students list is : {S}')
+        print('Students list is : ',S[1:2][0:])
 
            
 
