@@ -12,7 +12,7 @@ class person:
 class student(person):
     def __init__(self,code,Fname,Lname,sum):
         super().__init__(code,Fname,Lname)
-        self.sum=sum
+        self.sum=int(sum)
         
 
     def __del__(self):
@@ -78,11 +78,11 @@ while 1:
         count+=1
 
     elif func ==2:
-        S=[]
+        
         std=input('Please enter the code, first name, last name and sum. ')
         ls=std.split()
-        S[kount]=student(ls[0],ls[1],ls[2],ls[3])
-        print(str(S[count]))
+        S=student(ls[0],ls[1],ls[2],ls[3])
+        print(str(S))
         kount+=1
 
            
