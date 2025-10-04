@@ -20,15 +20,15 @@ class student(person):
     
     def ispass(self):
         if self.sum> 12:
-            s=(f'Student {self.Lname} is passed')
+            s='Passed'
             return s
         else:
-            s=(f'Student {self.Lname} is failed')
+            s='Failed'
             return s
 
     def __str__(self):
-        t=f'The student{self.Fname} {self.Lname} code {self.code} , sum is {self.sum} and he or she is {self.ispass()}'
-        print(t)
+        t=f'The student {self.Fname} {self.Lname} code {self.code} , sum is {self.sum} and he or she is {self.ispass()}'
+        return t
 
 class employee(person):
     def __init__(self,code,Fname,Lname,salary):
@@ -55,9 +55,11 @@ class employee(person):
     
     def __str__(self):
         s=f'Employee {self.Fname,self.Lname} code {self.code} pay is {self.pay()} \n The tax is {self.tax} \n The insurance is {self.insurance}'
-    
+        return s
 count=0
 kount=0
+E=[]
+S=[]
 while 1:
     
     print('Please enter the functions number : ')
@@ -70,7 +72,7 @@ while 1:
 
     if func == 1:
         
-        E=[]
+        
         emp=input('Please enter the code, first name, last name and salary . ')
         att=emp.split()
         E[count]=employee(att[0],att[1],att[2],att[3])
@@ -81,8 +83,8 @@ while 1:
         
         std=input('Please enter the code, first name, last name and sum. ')
         ls=std.split()
-        S=student(ls[0],ls[1],ls[2],ls[3])
-        print(str(S))
+        S.append(student(ls[0],ls[1],ls[2],ls[3]))
+        print(str(S[kount]))
         kount+=1
 
            
