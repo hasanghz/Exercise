@@ -65,7 +65,10 @@ while 1:
     print('Please enter the functions number : ')
     print('1 : Adding an employee.')
     print('2 : Adding a student. ')
+    print('3 : Employees list. ')
+    print('4 : Student list. ')
     print('0 : Exit the program')
+
     func=int(input())
     if func==0:
         break
@@ -86,6 +89,12 @@ while 1:
         S.append(student(ls[0],ls[1],ls[2],ls[3]))
         print(str(S[kount]))
         kount+=1
+    
+    elif func==3:
+        print(f'Employees list is : {E}')
+    
+    elif func==4:
+        print(f'Students list is : {S}')
 
            
 
