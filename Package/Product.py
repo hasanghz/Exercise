@@ -10,6 +10,7 @@ class Product:
     
     def __repr__(self):
         return self.__str__()
+    
 pr=[]
 tr=[] 
 kount=int(input('Please enter the number of products :'))
