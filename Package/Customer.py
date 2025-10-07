@@ -14,17 +14,6 @@ class Customer:
     def __repr__(self):
          return self.__str__()
     
-count=int(input('Please enter the number of customers :'))
-cs=[]
 
-for i in range (count) :
-     
-    f1=input('Please enter the first,last name and phone number : ')
-    ls=f1.split()
-    cs.append(Customer(ls[0],ls[1],ls[2]))
-    
-for x in range (len(cs)):
-     
-    print(cs[x].fname)
 
 
