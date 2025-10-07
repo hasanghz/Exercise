@@ -2,7 +2,7 @@ class Customer:
     def __init__(self,fname,lname,tel):
           self.fname=fname
           self.lname=lname
-          self.tel=tel
+          self.tel=int(tel)
 
     def __del__(self):
         print('object is deleted')
