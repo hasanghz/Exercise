@@ -15,7 +15,7 @@ class Product:
         print('object is deleted')
 
     def discount(self):
-        return self.price*0.8
+        return self.price*(100-self.discount)
 
     def __repr__(self):
         return self.__str__()
