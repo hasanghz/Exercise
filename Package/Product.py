@@ -1,13 +1,22 @@
 class Product:
     def __init__(self,name,price,discount):
         self.name=name
-        self.price=price
-        self.discount=discount
+        self.price=int(price)
+        self.discount=int(discount)
     
     def __str__(self):
         s=f'Product name is {self.name} \n Price is {self.price} \n {self.discount}'
         return s
     
+    def pay(self):
+        return self.price-self.discount()
+
+    def __del__(self):
+        print('object is deleted')
+
+    def discount(self):
+        return self.price*0.8
+
     def __repr__(self):
         return self.__str__()
     
