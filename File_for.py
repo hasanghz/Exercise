@@ -2,7 +2,7 @@ def for_file(ls,number):
     main_file=open('D:\\Python\\Exercise\\Exercise\\text5.txt','wt')
     for i in range(number):
         t=open(ls[i])
-        for line in open(t):
+        for line in t:
             main_file.write(line)
     main_file.close()
 
