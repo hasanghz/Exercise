@@ -15,6 +15,7 @@ for line in myfile.readlines():
         print(f'{lis[0]} has expired')
     elif expire_day-time_day >0 and expire_day-time_day<90 :
         print(f'{lis[0]} will expire soon !')
+
     elif expire_day-time_day > 90:
         print(f'{lis[0]} expire date is valid')
     
