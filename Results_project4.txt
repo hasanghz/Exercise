@@ -1,0 +1,5 @@
+The number of valid values is : 5 
+The sum is : 5530 
+The mean is : 1106.0
+The lowest is : 0
+ The highest is : 1250 

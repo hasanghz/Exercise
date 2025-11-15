@@ -1,0 +1,7 @@
+January,1200
+February,abc
+March,980
+April,1100
+May,
+June,1250
+July,1000
