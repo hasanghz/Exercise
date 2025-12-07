@@ -1,0 +1,6 @@
+Atorvastatin,12,18500,2025-01-02
+Atorvastatin,7,18500,2025-01-05
+Losartan,5,9800,2025-01-03
+Metformin,32,2500,2025-01-02
+Metformin,20,2500,2025-01-04
+Atorvastatin,3,18500,2025-01-06
