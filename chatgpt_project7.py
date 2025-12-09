@@ -1,5 +1,8 @@
 def prescriptions(filename):
-    dic={}
+    dic_Atorvastatin={}
+    dic_Losartan={}
+    dic_Metformin={}
+    drugs={}
     lis=[]
     with open(filename,'r', encoding='utf-8') as file:
         for line in file:
@@ -8,13 +11,15 @@ def prescriptions(filename):
             line=line.strip()
             parts=line.split(',')
             for i in range(len(parts)):
-                print(i)
                 try:
                     parts[i]=int(parts[i])
-
                 except:
                     continue
-        print(parts)
+            x=parts[0]
+            dic={'Quantity':parts[1], 'Price':parts[2],'Date':parts[3]}
+            drugs[parts[0]]=dic
+    print(drugs['Atorvastatin']['Quantity'])
+        
 
 
 
