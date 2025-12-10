@@ -1,9 +1,9 @@
+from collections import OrderedDict
 def prescriptions(filename):
-    dic_Atorvastatin={}
-    dic_Losartan={}
-    dic_Metformin={}
+    total_sale={}
     drugs={}
     lis=[]
+    most_sale={}
     with open(filename,'r', encoding='utf-8') as file:
         for line in file:
             if not line:
@@ -15,10 +15,23 @@ def prescriptions(filename):
                     parts[i]=int(parts[i])
                 except:
                     continue
-            x=parts[0]
+            
             dic={'Quantity':parts[1], 'Price':parts[2],'Date':parts[3]}
+            if parts[0] in drugs:
+                
+                total_sale[parts[0]]+=parts[2]*parts[1]
+            else:
+                total_sale[parts[0]]=parts[2]*parts[1]
+
+            
+            if parts[0] in drugs:
+
+                most_sale[parts[0]]+=parts[1]
+            else:
+                most_sale[parts[0]]=parts[1]
             drugs[parts[0]]=dic
-    print(drugs['Atorvastatin']['Quantity'])
+
+    print(drugs,'\n',total_sale,'\n',f'The maximum sale is : {max(most_sale)} and {(most_sale[max(most_sale)])}')
         
 
 
