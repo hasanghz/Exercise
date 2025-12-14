@@ -1,6 +1,7 @@
 from collections import OrderedDict
 def prescriptions(filename):
     total_sale={}
+    Max_sale={}
     drugs={}
     lis=[]
     most_sale={}
@@ -31,7 +32,7 @@ def prescriptions(filename):
                 most_sale[parts[0]]=parts[1]
             drugs[parts[0]]=dic
 
-    print(drugs,'\n',total_sale,'\n',f'The maximum sale is : {max(most_sale)} and {(most_sale[max(most_sale)])}')
+    print(drugs,'\n',total_sale,'\n',f'The maximum sale is : {max(most_sale)} and it is : {(most_sale[max(most_sale)])} \n The most sale is : ')
         
 
 
