@@ -1,67 +1,100 @@
-import requests
-from selenium import webdriver
+from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+import tkinter as tk
+from tkinter import messagebox
 
+# ================== راه‌اندازی Selenium ==================
+options = Options()
+options.headless = True
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=1920,1080")
 
-class TTACClient:
-    def __init__(self):
-        self.session = requests.Session()
-        self.device_identifier = "a5894ad8-bd16-46f0-bf98-44e959eb735c"
-        self._init_session()
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+wait = WebDriverWait(driver, 15)
 
-    def _init_session(self):
-        options = Options()
-        options.add_argument("--headless=new")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--no-sandbox")
+# باز کردن سایت
+driver.get("https://mobile.ttac.ir/")
+wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/barcodeUID/']"))).click()
+wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "styles_uid_button__3-wy8"))).click()
 
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+# ================== تابع بررسی UID ==================
+def check_uid(uid_code):
+    try:
+        uid = uid_code[18:38]
 
-        driver.get("https://mobile.ttac.ir/")
-        cookies = driver.get_cookies()
-        driver.quit()
+        input_field = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "styles_card_text_input__WDJdn"))
+        )
+        send_button = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "styles_card_button__2qa-L"))
+        )
 
-        # انتقال cookieها به requests
-        for c in cookies:
-            self.session.cookies.set(c["name"], c["value"])
+        # پاک کردن محتوای قبلی قبل از ارسال UID جدید
+        input_field.clear()
+        input_field.send_keys(uid)
+        send_button.click()
 
-    def check_uid(self, uid_code: str):
-        url = "https://newapi.ttac.ir/irfdamobile/v1/checkuId"
+        container = wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, "styles_container__rZSyv"))
+        )
 
-        params = {
-            "uidCode": uid_code,
-            "latitude": 0,
-            "longitude": 0,
-            "device": 2,
-            "deviceIdentifier": self.device_identifier,
-            "Platform": 0,
-            "PlatformVersion": 1,
-            "VersionCode": "",
-            "AppVersion": ""
-        }
+        # استخراج اطلاعات موردنظر
+        name_eng = container.find_element(By.XPATH, ".//p[contains(text(), 'TABLET') or contains(text(), 'mg')]").text
+        name_fa = container.find_element(By.XPATH, ".//p[@class='styles_box_text__28j4K']").text
+        price = container.find_element(By.XPATH, ".//p[contains(@class, 'styles_date_box_text__8M_KO')]").text
 
-        headers = {
-            "User-Agent": "Mozilla/5.0",
-            "Accept": "*/*",
-            "Origin": "https://mobile.ttac.ir",
-            "Referer": "https://mobile.ttac.ir/"
-        }
+        # قالب‌بندی خروجی: عنوان و مقدار در دو خط
+        result_text = f"💊 نام انگلیسی:\n{name_eng}\n\n💊 نام فارسی:\n{name_fa}\n\n💰 قیمت فراورده:\n{price}"
 
-        r = self.session.get(url, params=params, headers=headers, timeout=10)
+        # آماده شدن برای UID بعدی (پاک کردن فیلد و تمرکز دوباره)
+        input_field.clear()
+        input_field.click()
 
-        if r.status_code == 401:
-            # session منقضی شده → دوباره بساز
-            self._init_session()
-            r = self.session.get(url, params=params, headers=headers, timeout=10)
+        return result_text
 
-        r.raise_for_status()
-        return r.json()
-    
-client = TTACClient()
+    except Exception as e:
+        return f"❌ خطا:\n{e}"
 
-data = client.check_uid("13240014003003123598")
+# ================== GUI ==================
+def run_check():
+    uid = entry.get().strip()
 
-print(data)
+    if len(uid) < 38:
+        messagebox.showwarning("خطا", "UID معتبر وارد کنید")
+        return
+
+    result_label.config(text="⏳ در حال بررسی...")
+    root.update()
+
+    result = check_uid(uid)
+    result_label.config(text=result, font=("Tahoma", 14, "bold"))
+
+    # پاک کردن ورودی UID بعد از بررسی
+    entry.delete(0, tk.END)
+    entry.focus()
+
+root = tk.Tk()
+root.title("بررسی UID TTAC")
+root.geometry("550x450")
+root.resizable(False, False)
+
+tk.Label(root, text="UID را وارد کنید:", font=("Tahoma", 12, "bold")).pack(pady=10)
+
+entry = tk.Entry(root, width=50, font=("Tahoma", 12))
+entry.pack(pady=5)
+
+tk.Button(root, text="بررسی UID", command=run_check, height=2, font=("Tahoma", 12, "bold")).pack(pady=15)
+
+result_label = tk.Label(root, text="", wraplength=500, justify="right", font=("Tahoma", 14, "bold"))
+result_label.pack(pady=10)
+
+root.mainloop()
+
+# ================== پایان برنامه ==================
+# کروم باز است و آماده UID بعدی
